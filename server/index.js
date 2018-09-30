@@ -2,7 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const Artist = require('../database/index');
 const path = require('path');
-const cors = require('cors')
+const cors = require('cors');
+// const db = require()
 
 const app = express();
 

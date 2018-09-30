@@ -1,7 +1,58 @@
-var pg = require('knex')({
-  client: 'pg',
-  connection: 'postgres://guestuser:guestuser@localhost5432/spotify_popular_songs'
+const { Client } = require('pg');
+
+const client = new Client({
+  host: 'localhost',
+  port: 5432,
+  user: 'guestuser',
+  password: 'guestuser',
+  database: 'spotify_popular_songs'
 });
+// working copy insertion command
+//\copy popularsongs.songs FROM '/Users/karin_hsu/Desktop/Hack_Reactor/PopularSongs/database/seededData/songs/songsCSV1.csv' DELIMITER ',' CSV HEADER;
+
+client.connect((err) => {
+  if (err) {
+    console.error('connection error', err.stack);
+  } else {
+    console.log('connected');
+  }
+});
+
+const query = {
+  text: `insert into secondtest.thistest ("artistID", "name") values (5, 'pop')`
+};
+
+
+// client.query(query, (err, res) => {
+//   if (err) {
+//     console.log(err);
+//   } else {
+//     console.log(res.rows[res.rows.length - 1]);
+//   }
+//   // client.end();
+// });
+
+client.query('SELECT * from secondtest.thistest', (err, res) => {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log(res.rows[res.rows.length - 1]);
+  }
+  // client.end();
+});
+
+client.query(`copy popularsongs.songs FROM '/Users/karin_hsu/Desktop/Hack_Reactor/PopularSongs/database/seededData/songs/songsCSV3.csv' DELIMITER ',' CSV HEADER`, (err, res) => {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log('');
+  }
+  client.end();
+});
+
+
+
+
 // const mongoose = require('mongoose');
 // // const db = require('../config/keys').mongoURI;
 // const db = require('../config/keys').mongoMlab;
