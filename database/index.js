@@ -18,10 +18,13 @@ client.connect((err) => {
   }
 });
 
-const query = {
+const query = { 
   text: `insert into secondtest.thistest ("artistID", "name") values (5, 'pop')`
 };
 
+// wc -l database/seededData/albums/albumCSV1.csv
+// node --max-old-space-size=5000 ./database/dataGenerator.js
+// psql -f ./seedingQueries.sql spotify_popular_songszz
 
 // client.query(query, (err, res) => {
 //   if (err) {
@@ -41,7 +44,7 @@ client.query('SELECT * from secondtest.thistest', (err, res) => {
   // client.end();
 });
 
-client.query(`copy popularsongs.songs FROM '/Users/karin_hsu/Desktop/Hack_Reactor/PopularSongs/database/seededData/songs/songsCSV3.csv' DELIMITER ',' CSV HEADER`, (err, res) => {
+client.query(`\copy popularsongs.songs FROM '/Users/karin_hsu/Desktop/Hack_Reactor/PopularSongs/database/seededData/songs/songsCSV1.csv' DELIMITER ',' CSV HEADER`, (err, res) => {
   if (err) {
     console.log(err);
   } else {
@@ -49,6 +52,24 @@ client.query(`copy popularsongs.songs FROM '/Users/karin_hsu/Desktop/Hack_Reacto
   }
   client.end();
 });
+
+// client.query(`copy popularsongs.songs FROM '/Users/karin_hsu/Desktop/Hack_Reactor/PopularSongs/database/seededData/artists/artistsCSV1.csv' DELIMITER ',' CSV HEADER`, (err, res) => {
+//   if (err) {
+//     console.log(err);
+//   } else {
+//     console.log('');
+//   }
+//   client.end();
+// });
+
+// client.query(`copy popularsongs.songs FROM '/Users/karin_hsu/Desktop/Hack_Reactor/PopularSongs/database/seededData/albums/albumCSV1.csv' DELIMITER ',' CSV HEADER`, (err, res) => {
+//   if (err) {
+//     console.log(err);
+//   } else {
+//     console.log('');
+//   }
+//   client.end();
+// });
 
 
 

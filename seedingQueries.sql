@@ -13,3 +13,5 @@ copy popularsongs.artists FROM '/Users/karin_hsu/Desktop/Hack_Reactor/PopularSon
 -- psql -f ./seedingQueries.sql spotify_popular_songs
 
 --  node --max-old-space-size=5000 <filename>
+
+-- GRANT ALL PRIVILEGES ON TABLE side_adzone TO jerry;
