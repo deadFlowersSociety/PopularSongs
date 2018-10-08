@@ -1,4 +1,5 @@
 const faker = require('faker');
+// // const Artist = require('./index');
 const fs = require('fs');
 
 var artistIdCount = 0; 
@@ -9,21 +10,12 @@ const makeArtistEntry = () =>  {
 }
 
 const makeAlbumEntry = (numberOfAlbums) => {
-  var randomNumber = Math.floor(Math.random() * (1000 - 0) + 0);
-  var randomImage = `https://s3-us-west-1.amazonaws.com/spotifyimages/${randomNumber}.jpg`;
   return `${faker.random.number({
     min: 1, max: numberOfAlbums
-  })},${faker.lorem.words(3)},${randomImage},${Math.floor(Math.random() * (2018 - 1920 + 1)) + 1920}`;
+  })},${faker.lorem.words(3)},www.thiswillbetheurl.com/${faker.random.number({
+    min: 1, max: 1000,
+  })}.com,${Math.floor(Math.random() * (2018 - 1920 + 1)) + 1920}`;
 };
-// const makeAlbumEntry = (numberOfAlbums) => {
-//   var randomNumber = Math.floor(Math.random() * (1000 - 0) + 0);
-//   var randomImage = `https://s3-us-west-1.amazonaws.com/spotifyimages/${randomNumber}.jpg`;
-//   return `${faker.random.number({
-//     min: 1, max: numberOfAlbums
-//   })},${faker.lorem.words(3)},www.thiswillbetheurl.com/${faker.random.number({
-//     min: 1, max: 1000,
-//   })}.com,${Math.floor(Math.random() * (2018 - 1920 + 1)) + 1920}`;
-// };
 
 const makeSongsEntry = (numberOfSongs) => {
   return `${faker.random.number({

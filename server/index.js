@@ -25,7 +25,6 @@ if (cluster.isMaster) {
   });
 } else {
   const app = express();
-  // console.log("testing git");
   
   // parse application/x-www-form-urlencoded
   app.use(bodyParser.urlencoded({ extended: false }));
