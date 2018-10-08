@@ -2,8 +2,12 @@ const faker = require('faker');
 // // const Artist = require('./index');
 const fs = require('fs');
 
+var artistIdCount = 0; 
+const makeArtistEntry = () =>  {
 
-const makeArtistEntry = () =>  `${faker.name.firstName()} ${faker.name.lastName()}`;
+  artistIdCount++;
+  return `${artistIdCount},${faker.name.firstName()} ${faker.name.lastName()}`;
+}
 
 const makeAlbumEntry = (numberOfAlbums) => {
   return `${faker.random.number({
@@ -108,7 +112,7 @@ const generateData = async (numberOfArtists, numberOfAlbums, numberOfSongs, maxE
   // let albumCSV = fs.createWriteStream(`./database/seededData/albums/albumCSV1.csv`);
   // let songCSV = fs.createWriteStream(`./database/seededData/songs/songsCSV1.csv`);
   
-  artistCSV.write('name\n');
+  artistCSV.write('id,name\n');
 
   // while (artistStart < artistEnd) { //for scaling
   while (artistStart < artistEnd) {
