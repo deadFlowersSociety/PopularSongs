@@ -25,7 +25,10 @@ build/
 dist/
 
 # CSV files
-seededData/
+# seededData/
 
 ./config/keys.js
 ./newrelic.js
+
+# git rm --cached file1.txt
+# git commit -m "remove file1.txt"
