@@ -53,6 +53,8 @@ class App extends React.Component {
         allSongs = allSongs.slice(0, 10);
       
         this.setState({popularSongs: allSongs});
+      });
+    }
 
   createListOfSongs () {
     let albumArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
