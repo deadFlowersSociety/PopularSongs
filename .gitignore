@@ -24,3 +24,10 @@ coverage
 build/
 dist/
 
+# CSV files
+database/seededData/
+
+config/keys.js
+newrelic.js
+
+
