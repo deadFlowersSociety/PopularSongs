@@ -12,11 +12,11 @@ create table if not exists popularsongs.artists ("id" serial, "name" varchar(70)
 -- copy popularsongs.songs FROM '/Users/karin_hsu/Desktop/Hack_Reactor/PopularSongs/database/seededData/songs/songsCSV1.csv' DELIMITER ',' CSV HEADER;
 -- copy popularsongs.albums FROM '/Users/karin_hsu/Desktop/Hack_Reactor/PopularSongs/database/seededData/albums/albumCSV1.csv' DELIMITER ',' CSV HEADER;
 \copy popularsongs.artists FROM '/Users/karin_hsu/Desktop/Hack_Reactor/PopularSongs/database/seededData/artists/artistsCSV1.csv' DELIMITER ',' CSV HEADER;
+\copy popularsongs.artists FROM '/home/ec2-user/albumCSV1.csv' DELIMITER ',' CSV HEADER;
 
 -- -- psql -f ./seedingQueries.sql spotify_popular_songs
-
+-- // scp -i /Users/karin_hsu/Downloads/ec22.pem /Users/karin_hsu/Desktop/Hack_Reactor/PopularSongsTake1/database/seededData/albumCSV1.csv ec2-user@ec2-54-215-249-181.us-west-1.compute.amazonaws.com:/home/ec2-user
 -- --  node --max-old-space-size=5000 <filename>
-
 
 -- -- Cassandra Queries 
 

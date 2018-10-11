@@ -8,7 +8,7 @@ import CSSModules from 'react-css-modules';
 class App extends React.Component {
   constructor(props) {
     super(props);
-
+    
     this.state = {
       artistID: null,
       albumID: null,
@@ -19,25 +19,30 @@ class App extends React.Component {
       artistObj: null
     };
   }
-
+  
   componentDidMount() {
     var randNum = Math.floor(Math.random() * 100) + 1;
     this.setState({artistID: randNum});
-   
+    
     axios.get('/artist/' + randNum)
       .then(response => {
-
         let data = response.data;
-
+      
         this.setState({artistObj: data});
+      
+        this.setState({albumCovers: data[0].imgageUrl});
+      
+        let albumOne = data.map(e => [0, {
+          id: e.id, 
+          name: e.songName, 
+          image: e.imageUrl,
+          popularity: e.popularity,
+          library: e.inLibrary,
+          streams: e.streams
+        }]);
 
-        this.setState({albumCovers: data.albums[0].img});
-
-        let albumOne = data.albums[0].songs.map(e => [0, e]);
-        let albumTwo = data.albums[1].songs.map(e => [1, e]);
-        let albumThree = data.albums[2].songs.map(e => [2, e]);
-        let allSongs = albumOne.concat(albumTwo, albumThree);
-
+        let allSongs = albumOne;
+      
         allSongs.sort((a, b) => {
           if (a[1].popularity > b[1].popularity)
             return -1;
@@ -45,12 +50,11 @@ class App extends React.Component {
             return 1;
           return 0;
         });
-
+      
         allSongs = allSongs.slice(0, 10);
-
+      
         this.setState({popularSongs: allSongs});
       })
-
       .catch(error => {
         console.log(error);
       });
@@ -58,17 +62,16 @@ class App extends React.Component {
 
   createListOfSongs () {
     let albumArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-    return this.state.popularSongs.map((e, i) => <Song key={e[1]._id} counter={i+1} albumURL={this.state.albumCovers + albumArr[i] + '.jpg'} library={e[1].library} songName={e[1].name} streams={e[1].streams}/>);
+    return this.state.popularSongs.map((e, i) => <Song key={e[1]._id} counter={i + 1} albumURL={e[1].image} library={e[1].library} songName={e[1].name} streams={e[1].streams}/>);
   }
-
+  
   fiveBestSongs () {
     return this.createListOfSongs().slice(0, 5);
   }
-
+  
   render () {
-
+    
     return (
-      //<div className={"container-fluid popular-songs"}>
       <div className={'container-fluid'} styleName={'popular-songs'}>
         <div className={'row'}> 
           <div className={'col col-lg-1'}>
@@ -77,7 +80,7 @@ class App extends React.Component {
         </div>
       
         {this.state.showMore ? this.createListOfSongs() : this.fiveBestSongs()}
-
+      
         <div className={'row'}>
           <div className={'col col-lg-1'}></div>
           <div className={'col'}>
@@ -86,7 +89,7 @@ class App extends React.Component {
           <div className={'col col-lg-1'}></div>
         </div>
       </div> 
-
+      
       
     );
   }
@@ -97,9 +100,8 @@ export default CSSModules(App, styles);
 
 
 
-      
 
-        
-        
-        
-    
+
+
+
+
