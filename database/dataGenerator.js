@@ -10,19 +10,18 @@ const makeArtistEntry = () =>  {
 }
 
 const makeAlbumEntry = (numberOfAlbums) => {
-<<<<<<< HEAD
   var randomNumber = Math.floor(Math.random() * (1000 - 0) + 0);
   var randomImage = `https://s3-us-west-1.amazonaws.com/spotifyimages/${randomNumber}.jpg`;
   return `${faker.random.number({
     min: 1, max: numberOfAlbums
   })},${faker.lorem.words(3)},${randomImage},${Math.floor(Math.random() * (2018 - 1920 + 1)) + 1920}`;
-=======
+
   return `${faker.random.number({
     min: 1, max: numberOfAlbums
   })},${faker.lorem.words(3)},www.thiswillbetheurl.com/${faker.random.number({
     min: 1, max: 1000,
   })}.com,${Math.floor(Math.random() * (2018 - 1920 + 1)) + 1920}`;
->>>>>>> e58ee99f71f0b9304d981c7bce146fef92b45c07
+
 };
 
 const makeSongsEntry = (numberOfSongs) => {
@@ -59,7 +58,7 @@ const writeArtistCSV = async (numberOfArtists, artistCSVPath) => {
 };
 
 //make these async awaits because this is where the sorting is happening 
-<<<<<<< HEAD
+
 const writeAlbumCSV = async (numberOfAlbums, albumCSVPath) => {
   // albumCSVPath.write('artistID,name,imageUrl,yearPublished\n');
   var i;
@@ -80,7 +79,7 @@ const writeAlbumCSV = async (numberOfAlbums, albumCSVPath) => {
   // }
   // albumCSVPath.end();
 };
-=======
+
 // const writeAlbumCSV = async (numberOfAlbums, albumCSVPath) => {
 //   albumCSVPath.write('artistID,name,imageUrl,yearPublished\n');
 //   var i;
@@ -101,7 +100,6 @@ const writeAlbumCSV = async (numberOfAlbums, albumCSVPath) => {
 //   // }
 //   // albumCSVPath.end();
 // };
->>>>>>> e58ee99f71f0b9304d981c7bce146fef92b45c07
 
 // const writeSongCSV = (numberOfSongs, songCSVPath) => {
 //   songCSVPath.write('artistId,name,streams,length,popularity,inLibrary\n');
@@ -169,6 +167,36 @@ const generateData = async (numberOfArtists, numberOfAlbums, numberOfSongs, maxE
     //   albumFileNumber += 1;
     // }
   }
+
+  let artistCSV = fs.createWriteStream(`./database/seededData/artists/artistsCSV1.csv`);
+  // let albumCSV = fs.createWriteStream(`./database/seededData/albums/albumCSV1.csv`);
+  // let songCSV = fs.createWriteStream(`./database/seededData/songs/songsCSV1.csv`);
+  
+  artistCSV.write('id,name\n');
+
+  // while (artistStart < artistEnd) { //for scaling
+  while (artistStart < artistEnd) {
+    await writeArtistCSV(numberOfArtists, artistCSV);
+    // artistCSV = fs.createWriteStream(`./database/seededData/artists/artistsCSV${artistFileNumber}.csv`); //to accomodate creation of multipl csv files
+    // artistCSV = fs.createWriteStream(`./database/seededData/artists/artistsCSV1.csv`);
+    artistStart += numberOfArtists; 
+    // if (artistFileNumber < 10) {
+    //   artistFileNumber += 1;
+    // }
+  }
+
+  // while (albumStart < albumEnd) {
+  // while (albumStart < albumEnd) {
+  //   await writeAlbumCSV(numberOfAlbums, albumCSV);
+  //   // albumCSV = fs.createWriteStream(`./database/seededData/albums/albumCSV${albumFileNumber}.csv`); //to accomodate creation of multipl csv files
+  //   // albumCSV = fs.createWriteStream(`./database/seededData/albums/albumCSV1.csv`);
+  //   // albumCounts += numberOfArtists;
+  //   albumStart += numberOfAlbums; 
+  //   // if (albumFileNumber < 10) {
+  //   //   albumFileNumber += 1;
+  //   // }
+  // }
+
  
   // while (songStart < songEnd) {
   // while (songStart < songEnd) {
@@ -185,4 +213,6 @@ const generateData = async (numberOfArtists, numberOfAlbums, numberOfSongs, maxE
 // number of artists, number of albums, number of songs
 generateData(2000000, 2000000, 2000000, 10000000);
 
+
 // 10M artists iwth one album, and at least 10 songs
+
